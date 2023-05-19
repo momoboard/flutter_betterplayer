@@ -75,7 +75,6 @@ public class AssetDownloadManager: NSObject {
         #else
         var localAsset = retrieveLocalAsset(with: asset.assetTitle)
 
-        print(activeDownloadsDictionary);
         if !activeDownloadsDictionary.contains(where: { $0.value == asset }) && localAsset == nil {
             // Start new download:
             guard let task = assetDownloadURLSession

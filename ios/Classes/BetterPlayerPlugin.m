@@ -445,7 +445,7 @@ bool _remoteCommandsInitialized = false;
             if (urlArg != [NSNull null]){
                 NSURL* url = [NSURL URLWithString:urlArg];
                 if ( maxCacheSize != nil) {
-                    [_cacheManager setMaxCacheSize:maxCacheSize];
+                    // [_cacheManager setMaxCacheSize:maxCacheSize];
                 }
                 [_cacheManager preCacheUrl:url cacheKey:cacheKey videoExtension:videoExtension completionHandler:^(BOOL success){
                 }];

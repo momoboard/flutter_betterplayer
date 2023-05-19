@@ -73,8 +73,10 @@ public class AssetDownloadManager: NSObject {
         #if targetEnvironment(simulator)
         completion?(.failure(AssetDownloadManagerError.notSupport))
         #else
-        
-        if !activeDownloadsDictionary.contains(where: { $0.value == asset }) {
+        var localAsset = retrieveLocalAsset(with: asset.assetTitle)
+
+        print(activeDownloadsDictionary);
+        if !activeDownloadsDictionary.contains(where: { $0.value == asset }) && localAsset == nil {
             // Start new download:
             guard let task = assetDownloadURLSession
                 .makeAssetDownloadTask(
@@ -82,7 +84,6 @@ public class AssetDownloadManager: NSObject {
                     assetTitle: asset.assetTitle,
                     assetArtworkData: nil,
                     options: options) else { return }
-            
             task.taskDescription = asset.assetTitle
             activeDownloadsDictionary[task] = asset
             task.resume()

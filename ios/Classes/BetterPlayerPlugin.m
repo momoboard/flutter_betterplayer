@@ -436,10 +436,17 @@ bool _remoteCommandsInitialized = false;
             if (videoExtension == [NSNull null]){
                 videoExtension = nil;
             }
-            
+            if ( maxCacheSize == [NSNull null]){
+                maxCacheSize = nil;
+            }
+            if ( cacheKey == [NSNull null]){
+                cacheKey = nil;
+            }
             if (urlArg != [NSNull null]){
                 NSURL* url = [NSURL URLWithString:urlArg];
-                [_cacheManager setMaxCacheSize:maxCacheSize];
+                if ( maxCacheSize != nil) {
+                    [_cacheManager setMaxCacheSize:maxCacheSize];
+                }
                 [_cacheManager preCacheUrl:url cacheKey:cacheKey videoExtension:videoExtension completionHandler:^(BOOL success){
                 }];
             }

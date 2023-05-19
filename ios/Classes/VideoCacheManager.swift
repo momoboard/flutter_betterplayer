@@ -29,7 +29,7 @@ import AVFoundation
         
         let asset = getAssetWrapper(url, cacheKey: cacheKey)!
 
-        assetDownloadManager.downloadStream(for: asset, completion:  { (result) in
+        assetDownloadManager.download(asset: asset, completion:  { (result) in
             switch result {
             case .success(let response):
                 print(response)
@@ -52,7 +52,7 @@ import AVFoundation
         guard let arg = AssetDownloadManager.shared.retrieveLocalAsset(with: key) else {
             let asset = getAssetWrapper(url, cacheKey: key)!
 
-            assetDownloadManager.downloadStream(for: asset)
+            assetDownloadManager.download(asset: asset)
             return AVPlayerItem(asset: AVURLAsset(url: url))
         }
         let item = AVPlayerItem(asset: arg.0.urlAsset)

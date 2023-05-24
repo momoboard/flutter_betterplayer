@@ -273,6 +273,13 @@ class BetterPlayerController {
     ///Process data source
     await _setupDataSource(betterPlayerDataSource);
     setTrack(BetterPlayerAsmsTrack.defaultTrack());
+
+    ///Set the volume at initialization
+    if (betterPlayerConfiguration.volumeMutedOnInitialize) {
+      setVolume(0);
+    } else if (betterPlayerConfiguration.volume != null) {
+      setVolume(betterPlayerConfiguration.volume!);
+    }
   }
 
   ///Configure subtitles based on subtitles source.

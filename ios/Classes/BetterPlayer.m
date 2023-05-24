@@ -28,6 +28,8 @@ AVPictureInPictureController *_pipController;
     _disposed = false;
     _player = [[AVPlayer alloc] init];
     _player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    _player.volume = 0.0;
+    
     ///Fix for loading large videos
     if (@available(iOS 10.0, *)) {
         _player.automaticallyWaitsToMinimizeStalling = false;

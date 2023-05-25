@@ -619,6 +619,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 
 - (void)setupPipController {
     if (@available(iOS 9.0, *)) {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
         [[AVAudioSession sharedInstance] setActive: YES error: nil];
         [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
         if (!_pipController && self._playerLayer && [AVPictureInPictureController isPictureInPictureSupported]) {
@@ -723,7 +724,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
                                      withOptions:AVAudioSessionCategoryOptionMixWithOthers
                                            error:nil];
   } else {
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
   }
 }
 

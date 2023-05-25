@@ -23,6 +23,11 @@ AVPictureInPictureController *_pipController;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super init];
     NSAssert(self, @"super init cannot be nil");
+    // Set up audio session
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory: AVAudioSessionCategorySoloAmbient error:&error];
+    [session setActive:YES error:nil];
+
     _isInitialized = false;
     _isPlaying = false;
     _disposed = false;

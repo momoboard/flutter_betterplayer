@@ -118,6 +118,14 @@ class BetterPlayerConfiguration {
   ///Default value is false.
   final bool useRootNavigator;
 
+  ///Flag which sets the volume to 0 when the player is initialized.
+  ///Default value is false.
+  final bool volumeMutedOnInitialize;
+
+  ///Flag to set the volume when the player is initialized.
+  ///Default value is 1.0.
+  final double? volume;
+
   const BetterPlayerConfiguration({
     this.aspectRatio,
     this.autoPlay = false,
@@ -156,6 +164,8 @@ class BetterPlayerConfiguration {
     this.autoDispose = true,
     this.expandToFill = true,
     this.useRootNavigator = false,
+    this.volumeMutedOnInitialize = false,
+    this.volume,
   });
 
   BetterPlayerConfiguration copyWith({
@@ -188,6 +198,8 @@ class BetterPlayerConfiguration {
     bool? autoDispose,
     bool? expandToFill,
     bool? useRootNavigator,
+    bool? volumeMutedOnInitialize,
+    double? volume,
   }) {
     return BetterPlayerConfiguration(
       aspectRatio: aspectRatio ?? this.aspectRatio,
@@ -228,6 +240,9 @@ class BetterPlayerConfiguration {
       autoDispose: autoDispose ?? this.autoDispose,
       expandToFill: expandToFill ?? this.expandToFill,
       useRootNavigator: useRootNavigator ?? this.useRootNavigator,
+      volumeMutedOnInitialize:
+          volumeMutedOnInitialize ?? this.volumeMutedOnInitialize,
+      volume: volume ?? this.volume,
     );
   }
 }

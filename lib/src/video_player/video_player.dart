@@ -15,6 +15,28 @@ final VideoPlayerPlatform _videoPlayerPlatform = VideoPlayerPlatform.instance
 // performed.
   ..init();
 
+/// Helper class for preCaching media
+class BetterPlayerPreCacherManager {
+  static Future clearCache() async {
+    return _videoPlayerPlatform.clearCache();
+  }
+
+  static Future preCache(DataSource dataSource, int preCacheSize) async {
+    return _videoPlayerPlatform.preCache(dataSource, preCacheSize);
+  }
+
+  static Future<void> preCacheList(
+      List<DataSource> dataSources, int preCacheSize) async {
+    for (final dataSource in dataSources) {
+      await _videoPlayerPlatform.preCache(dataSource, preCacheSize);
+    }
+  }
+
+  static Future stopPreCache(String url, String? cacheKey) async {
+    return _videoPlayerPlatform.stopPreCache(url, cacheKey);
+  }
+}
+
 /// The duration, current position, buffering state, error state and settings
 /// of a [VideoPlayerController].
 class VideoPlayerValue {

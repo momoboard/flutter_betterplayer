@@ -14,7 +14,7 @@
 NSMutableDictionary* _dataSourceDict;
 NSMutableDictionary*  _timeObserverIdDict;
 NSMutableDictionary*  _artworkImageDict;
-CacheManager* _cacheManager;
+VideoCacheManager* _cacheManager;
 int texturesCount = -1;
 BetterPlayer* _notificationPlayer;
 bool _remoteCommandsInitialized = false;
@@ -40,7 +40,7 @@ bool _remoteCommandsInitialized = false;
     _timeObserverIdDict = [NSMutableDictionary dictionary];
     _artworkImageDict = [NSMutableDictionary dictionary];
     _dataSourceDict = [NSMutableDictionary dictionary];
-    _cacheManager = [[CacheManager alloc] init];
+    _cacheManager = [[VideoCacheManager alloc] init];
     [_cacheManager setup];
     return self;
 }
@@ -108,6 +108,7 @@ bool _remoteCommandsInitialized = false;
 
 - (void) setRemoteCommandsNotificationActive{
     [[AVAudioSession sharedInstance] setActive:true error:nil];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:nil];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 }
 
@@ -436,16 +437,19 @@ bool _remoteCommandsInitialized = false;
             if (videoExtension == [NSNull null]){
                 videoExtension = nil;
             }
-            
+            if ( maxCacheSize == [NSNull null]){
+                maxCacheSize = nil;
+            }
+            if ( cacheKey == [NSNull null]){
+                cacheKey = nil;
+            }
             if (urlArg != [NSNull null]){
                 NSURL* url = [NSURL URLWithString:urlArg];
-                if ([_cacheManager isPreCacheSupportedWithUrl:url videoExtension:videoExtension]){
-                    [_cacheManager setMaxCacheSize:maxCacheSize];
-                    [_cacheManager preCacheURL:url cacheKey:cacheKey videoExtension:videoExtension withHeaders:headers completionHandler:^(BOOL success){
-                    }];
-                } else {
-                    NSLog(@"Pre cache is not supported for given data source.");
+                if ( maxCacheSize != nil) {
+                    // [_cacheManager setMaxCacheSize:maxCacheSize];
                 }
+                [_cacheManager preCacheUrl:url cacheKey:cacheKey videoExtension:videoExtension completionHandler:^(BOOL success){
+                }];
             }
             result(nil);
         } else if ([@"clearCache" isEqualToString:call.method]){
@@ -457,13 +461,9 @@ bool _remoteCommandsInitialized = false;
             NSString* videoExtension = argsMap[@"videoExtension"];
             if (urlArg != [NSNull null]){
                 NSURL* url = [NSURL URLWithString:urlArg];
-                if ([_cacheManager isPreCacheSupportedWithUrl:url videoExtension:videoExtension]){
-                    [_cacheManager stopPreCache:url cacheKey:cacheKey
-                              completionHandler:^(BOOL success){
-                    }];
-                } else {
-                    NSLog(@"Stop pre cache is not supported for given data source.");
-                }
+                [_cacheManager stopPreCache:url cacheKey:cacheKey
+                          completionHandler:^(BOOL success){
+                }];
             }
             result(nil);
         } else {

@@ -211,7 +211,9 @@ public class AssetDownloadManager: NSObject {
     }
 
     public static let shared = AssetDownloadManager()
-    public static let options: [String : Any] = [AVAssetDownloadTaskMinimumRequiredMediaBitrateKey: 265_000]
+//    public static let options: [String : Any] = [AVAssetDownloadTaskMinimumRequiredMediaBitrateKey: 512_000]
+    public static let options: [String : Any] = [:]
+
     
     // MARK: - initializer
     override public init() {

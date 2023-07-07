@@ -211,7 +211,7 @@ public class AssetDownloadManager: NSObject {
     }
 
     public static let shared = AssetDownloadManager()
-//    public static let options: [String : Any] = [AVAssetDownloadTaskMinimumRequiredMediaBitrateKey: 512_000]
+   public static let options: [String : Any] = [AVAssetDownloadTaskMinimumRequiredMediaBitrateKey: 1_250_000]
     public static let options: [String : Any] = [:]
 
     

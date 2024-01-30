@@ -1,10 +1,3 @@
-//
-//  DataCacher.swift
-//  CacheDemo
-//
-//  Created by Nguyen Cong Huy on 7/4/16.
-//  Copyright © 2016 Nguyen Cong Huy. All rights reserved.
-//
 import UIKit
 
 open class DataCacher {

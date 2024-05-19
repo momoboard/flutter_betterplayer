@@ -1,14 +1,14 @@
 name: better_player
 description: Advanced video player based on video_player and Chewie. It's solves many typical use cases and it's easy to run.
-version: 0.0.9
+version: 0.0.91
 homepage: https://github.com/Stash-Ventures/betterplayer
 documentation: https://jhomlala.github.io/betterplayer/
 
 publish_to: none
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=2.2.3"
+  sdk: ">=3.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:

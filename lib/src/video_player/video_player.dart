@@ -28,7 +28,11 @@ class BetterPlayerPreCacherManager {
   static Future<void> preCacheList(
       List<DataSource> dataSources, int preCacheSize) async {
     for (final dataSource in dataSources) {
-      await _videoPlayerPlatform.preCache(dataSource, preCacheSize);
+      try {
+        await _videoPlayerPlatform.preCache(dataSource, preCacheSize);
+      } catch (exception) {
+        print("Failed to precache: $exception");
+      }
     }
   }
 

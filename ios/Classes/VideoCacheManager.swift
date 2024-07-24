@@ -19,26 +19,32 @@ import AVFoundation
 
     func getAssetWrapper(_ url: URL, cacheKey: String?) -> AssetWrapper? {
         let key: String = cacheKey ?? url.absoluteString
-        let urlAsset = AVURLAsset(url: url)
+        let urlAsset: AVURLAsset = AVURLAsset(url: url)
         let asset = AssetWrapper(urlAsset: urlAsset, assetTitle: key)
         return asset
     }
 
     @objc public func preCacheUrl(_ url: URL, cacheKey: String?, videoExtension: String?, completionHandler: ((_ success:Bool) -> Void)?) {
-        self.completionHandler = completionHandler
+        do {
+            self.completionHandler = completionHandler
         
-        let asset = getAssetWrapper(url, cacheKey: cacheKey)!
+            let asset = getAssetWrapper(url, cacheKey: cacheKey)!
 
-        assetDownloadManager.download(asset: asset, completion:  { (result) in
-            switch result {
-            case .success(let response):
-                print(response)
-                self.completionHandler?(true)
-            case .failure(let error):
-                print(error)
-                self.completionHandler?(false)
-            }
-        })
+            assetDownloadManager.download(asset: asset, completion:  { (result) in
+                switch result {
+                case .success(let response):
+                    print("Precache Success")
+                    print(response)
+                    self.completionHandler?(true)
+                case .failure(let error):
+                print("Precache Failure")
+                    print(error)
+                    self.completionHandler?(false)
+                }
+            })
+        } catch {
+            print("Precache Error: \(error)")
+        }
     }
 
     @objc public func stopPreCache(_ url: URL, cacheKey: String?, completionHandler: ((_ success:Bool) -> Void)?){

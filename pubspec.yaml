@@ -1,6 +1,6 @@
 name: better_player
 description: Advanced video player based on video_player and Chewie. It's solves many typical use cases and it's easy to run.
-version: 0.0.91
+version: 0.0.93
 homepage: https://github.com/Stash-Ventures/betterplayer
 documentation: https://jhomlala.github.io/betterplayer/
 

@@ -321,7 +321,7 @@ class DataSource {
       result = "$result:$rawFormalHint";
     }
 
-    return result!;
+    return result ?? '';
   }
 
   @override
